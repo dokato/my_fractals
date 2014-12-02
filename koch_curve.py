@@ -9,8 +9,8 @@ __author__ = 'Dominik Krzeminski'
 
 def koch_iter(x,y):
     """
-    One iteration of Koch curve. From two list of length 2 (x and y
-    coordinates) it gives two lists of length 5.
+    One iteration of Koch curve. From two lists of lengths 2 (x and y
+    coordinates) it gives two lists of lengths 5.
     """
     h_x = (x[1]-x[0])*1./3
     h_y = (y[1]-y[0])*1./3
@@ -34,7 +34,7 @@ def koch_curve(n, bord = [0,3]):
     """
     Koch curve algorithm.
     Parameters: n - number of iterations, bord = [0,3] - x 
-                coordinates ofinitial line.
+                coordinates of initial line.
     """
     left,right = bord
     n_x = [left,right]
@@ -53,6 +53,7 @@ def koch_curve(n, bord = [0,3]):
     return n_x,n_y
 
 def plot(data_x,data_y,title = ""):
+    "Helper function to plot results of koch curve"
     py.title(title)
     py.plot(data_x,data_y,'r',lw=2)
     py.tick_params(axis='both', which='both', bottom=0, top=0,
