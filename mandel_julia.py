@@ -6,7 +6,6 @@ import pylab as py
 
 __author__ = 'Dominik Krzeminski'
 
-
 def mandel(n=500, m=500, itermax=80, x_lim=[-2,2], y_lim=[-2,2]):
     """
     Function for calculating Mandelbrot set.

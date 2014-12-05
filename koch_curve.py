@@ -30,15 +30,11 @@ def koch_iter(x,y):
             ny.append(py)
     return nx,ny
 
-def koch_curve(n, bord = [0,3]):
+def koch_loop(n, n_x, n_y):
     """
-    Koch curve algorithm.
-    Parameters: n - number of iterations, bord = [0,3] - x 
-                coordinates of initial line.
+    Parameters: n - number of iterations,
+                n_x, n_y - list of initial coordinates in X and Y axis.
     """
-    left,right = bord
-    n_x = [left,right]
-    n_y = [0 , 0]
     for i in xrange(n):
         p_x, p_y = list(n_x), list(n_y)
         n_x, n_y = [],[]
@@ -50,6 +46,18 @@ def koch_curve(n, bord = [0,3]):
             p_y.pop(0)
         n_x.append(x_[-1])
         n_y.append(y_[-1])
+    return n_x, n_y
+
+def koch_curve(n, bord = [0,3]):
+    """
+    Koch curve algorithm.
+    Parameters: n - number of iterations, bord = [0,3] - x 
+                coordinates of initial line.
+    """
+    left,right = bord
+    n_x = [left,right]
+    n_y = [0 , 0]
+    n_x,n_y = koch_loop(n, n_x, n_y)
     return n_x,n_y
 
 def koch_snowflake(n, length = 3):
@@ -62,17 +70,7 @@ def koch_snowflake(n, length = 3):
     right = length
     n_x = [left, 0.5*right, right, left]
     n_y = [0, right*np.sin(np.pi/3), 0, 0]
-    for i in xrange(n):
-        p_x, p_y = list(n_x), list(n_y)
-        n_x, n_y = [],[]
-        while len(p_x)>=2:
-            x_,y_ = koch_iter(p_x[0:2],p_y[0:2])
-            n_x.extend(x_[:-1])
-            n_y.extend(y_[:-1])
-            p_x.pop(0)
-            p_y.pop(0)
-        n_x.append(x_[-1])
-        n_y.append(y_[-1])
+    n_x,n_y = koch_loop(n, n_x, n_y)
     return n_x,n_y
 
 def plot(data_x,data_y,title = "", lim = True):
